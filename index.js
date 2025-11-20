@@ -154,7 +154,7 @@ REGLAS DE ORO DE COMPORTAMIENTO (MANDO OBLIGATORIO):
 
 INSTRUCCIÓN DE EJECUCIÓN:
 Analiza el mensaje del usuario. Identifica su intención. Busca la respuesta en ${infoProyecto}. Aplica la regla de las 4P si aplica. Redacta una respuesta breve (máx 4 líneas), empática y TERMINA CON PREGUNTA.
-`;
+
         
         CLIENTE DICE: "${userMessage}"
         `;
