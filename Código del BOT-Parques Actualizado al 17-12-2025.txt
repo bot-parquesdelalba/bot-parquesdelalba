@@ -15,22 +15,22 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 // --- NÚMEROS ---
-const BOT_NUMBER = 'whatsapp:+51981415762';
-const ASESOR_NUMBER = 'whatsapp:+51955589344';
+const BOT_NUMBER = 'whatsapp:+51981415762'; 
+const ASESOR_NUMBER = 'whatsapp:+51955589344'; 
 
 // --- MEMORIA VOLÁTIL (RAM) ---
 // Aquí guardaremos el chat de cada cliente mientras el servidor esté prendido.
-const historialConversaciones = {};
+const historialConversaciones = {}; 
 
 // --- TEMPORIZADORES (NUEVO) ---
 // Aquí guardaremos los relojes de seguimiento
-const seguimientoTimers = {};
+const seguimientoTimers = {}; 
 
 // --- FUNCIÓN DE LOGS (AUDITORÍA) ---
 function registrarLog(rol, mensaje, telefono) {
     const fecha = new Date().toLocaleString("es-PE", { timeZone: "America/Lima" });
     const lineaLog = `[${fecha}] ${telefono} - ${rol}: ${mensaje}\n`;
-    console.log(lineaLog.trim());
+    console.log(lineaLog.trim()); 
     try {
         fs.appendFileSync('historial_chat.txt', lineaLog);
     } catch (err) { console.error("Error Log:", err); }
@@ -41,7 +41,6 @@ const infoProyecto = `
 --- 1. IDENTIDAD ---
 PROYECTO: Residencial "Parques del Alba". Un desarrollo con Proyección Urbana.
 UBICACIÓN DE NUESTRAS OFICINAS: AV. Luis Montero Mz W Lote 12 (Frente al estadio Miguel Grau).
-NUESTRO HORARIO DE ATENCIÓN PARA LA CITAS: De lunes a viernes de 9am a 5pm y Sábado de 9:00am hasta las 3 pm. (Es posible realizar cita fuera del horario previa coordinación)
 UBICACIÓN DEL PROYECTO: Km 7.5 Carretera a Chulucanas, Piura. A 20 minutos del centro.
 ESTRUCTURA EMPRESARIAL (CONSORCIO):
 - PROPIETARIA DEL TERRENO: MADI INGENIERIA DE PROYECTOS S.A.C.S. (Partida Registral N° 11272385) - Garantiza la titularidad.
@@ -49,31 +48,31 @@ ESTRUCTURA EMPRESARIAL (CONSORCIO):
 - CONSTRUCTORA: NATIVO ARQUITECTURA Y CONSTRUCCIÓN SAC - Garantiza la ejecución de obra.
 ESTADO LEGAL: "Transparencia Total". Lotes con partida matriz inscrita en SUNARP. Entrega con Dossier de Transparencia. Venta por acciones y derechos.
 --- 2. PRODUCTO ---
-CANTIDAD: 162 lotes exclusivos.
+CANTIDAD: 149 lotes exclusivos.
 TAMAÑOS: Desde 90m² hasta 225m².
 SERVICIOS (LO QUE CALMA AL CEREBRO REPTILIANO - SEGURIDAD):
 1. Pórtico de Ingreso con Caseta de Seguridad: Característica #1 más valorada según estudio de mercado. Seguridad permanente, no provisional.
 2. Servicios Básicos: Agua y red eléctrica con instalaciones garantizadas (no provisionales).
-3. Áreas Verdes y Parques Temáticos: Tres parques que contaran con zona de parillas, mirador, cancha de futbol y juegos infantiles.
+3. Áreas Verdes y Parques Temáticos: Tres parques que contaran con zona de parillas, mirador, cancha de fuutbol y juegos infantiles.
 Diseñados para la "Vida Verde" y el bienestar familiar.
-4.Cerco vivo y reforestación: Contaremos con un cerco natural Lateral y reforestaremos cada calle para generar un proyecto verde, limpio y con sombra (Muy importante en la ciudad de Piura).
-5. Vias afirmadas amplias: Con doble vía y zona de estacionamiento.
+4.Cerco vivo y reforestación: Contaremos con un cerco natural Lateral y reforestaremos para generar un proyecto verde, limpio y con sombra (Muy importante en la ciudad de Piura).
+5. Vias afirmadas amplias: Con doble vía y zona de estacionamiento. 
 6. Veredas de Concreto.
 INFRAESTRUCTURA VIAL (MANEJO DE LA OBJECIÓN "PISTAS"):
 - Tipo: Pistas afirmadas de alta compactación con ingeniería de drenaje.
-- Justificación Técnica (El "Re-encuadre"): "En Piura, el asfalto simple se daña rápido con las lluvias y crea lagunas. El afirmado compactado técnico garantiza un DRENAJE PLUVIAL SUPERIOR, evitando inundaciones. Además, esta decisión técnica nos permite mantener el precio de m² más competitivo del mercado (S/230 aprox) en lugar de trasladarle un sobrecosto al cliente."
+- Justificación Técnica (El "Re-encuadre"): "En Piura, el asfalto simple se daña rápido con las lluvias y crea lagunas. El afirmado compactado técnico garantiza un DRENAJE PLUVIAL SUPERIOR, evitando inundaciones. Además, esta decisión técnica nos permite mantener el precio de m² más competitivo del mercado (S/200 aprox) en lugar de trasladarle un sobrecosto al cliente."
 --- 3. PRECIOS (4P) ---
-PRECIO BASE: S/ 230 - S/ 265 por m².
-LOTE 90m²: Aprox S/ 21,000 - S/ 24,000.
-FINANCIAMIENTO: Directo, solo DNI. Inicial S/ 2,000. Plazo 16 meses.
+PRECIO BASE: S/ 200 - S/ 230 por m².
+LOTE 90m²: Aprox S/ 18,000 - S/ 21,000.
+FINANCIAMIENTO: Directo, solo DNI. Inicial S/ 2,000. Plazo 18 meses.  
 BENEFICIO: Sin Alcabala.
 ESTRATEGIA DE PRECIOS:
-- Fase de venta: Precios económicos.
-- Beneficio Actual: Gran descuento por pago al contado.
+- Fase Prelanzamiento: Descuentos agresivos.
+- Beneficio Actual: Descuento de 1000 soles por pago al contado. 
 --- 5. PERFILES DE CLIENTE Y GUIONES DE VENTA (NEUROVENTA) ---
 PERFIL A: EL INVERSIONISTA ("TÍO LUCHO" / ESTRATÉGICO) - 35% DEL MERCADO
 - Dolor: Miedo a perder capital, inflación, busca ROI rápido.
-- Argumento Ganador: "Doble Motor de Valorización". Compra hoy a precio de tierra (S/230/m²) antes de que el proyecto centralidad comercial dispare los precios.
+- Argumento Ganador: "Doble Motor de Valorización". Compra hoy a precio de tierra (S/200/m²) antes de que el proyecto centralidad comercial dispare los precios.
 - Datos a usar: Rentabilidad proyectada, cercanía al Proyecto del GORE, seguridad jurídica (MADI propietario).
 - Cierre sugerido: "El dinero en el banco pierde valor. Aquí, la tierra trabaja por usted gracias a nuestro desarrollo y a la obra del GORE."
 PERFIL B: FAMILIA JOVEN ("LOS PÉREZ" / 1RA VIVIENDA) - 31% DEL MERCADO
@@ -83,7 +82,7 @@ PERFIL B: FAMILIA JOVEN ("LOS PÉREZ" / 1RA VIVIENDA) - 31% DEL MERCADO
 - Cierre sugerido: "Imaginen a sus hijos jugando seguros aquí. La cuota es similar a un alquiler, pero es SUYO."
 PERFIL C: PROFESIONAL ESTABLECIDO (RETIRO / CASA CAMPO) - 34% DEL MERCADO
 - Dolor: Estrés de la ciudad, busca paz, seguridad y estatus.
-- Argumento Ganador: "El amanecer de tu tranquilidad". Lotes grandes, silencio, áreas verdes, lejos del caos, pero cerca de servicios.
+- Argumento Ganador: "El amanecer de tu tranquilidad". Lotes grandes, silencio, áreas verdes, lejos del caos pero cerca de servicios.
 - Datos a usar: Calidad de vida, vecinos seleccionados, pórtico de seguridad 24/7.
 - Cierre sugerido: "Usted ha trabajado duro. Merece un lugar donde desconectar con seguridad absoluta."
 --- 6. MATRIZ DE MANEJO DE OBJECIONES (TÉCNICA DE 5 PASOS) ---
@@ -92,9 +91,9 @@ OBJECIÓN: "ESTÁ MUY LEJOS (KM 7.5)"
 - Respuesta (Re-encuadre): "Lo entiendo, parece lejos si miramos la foto de hoy. Pero le invito a ver la foto del mañana: Estamos a 2 minutos del futuro eje comercial de piura (Centralidad comercial). No está comprando lejanía, está comprando la futura zona comercial de Piura a precio de preventa. ¿Prefiere comprar barato hoy o caro cuando ya esté el Terminal interprovincial mas grande de Piura?"
 
 OBJECIÓN: "NO TIENE PISTAS ASFALTADAS / ES TIERRA"
-- Respuesta (El "Sistema Híbrido"): "Permítame hacerle una precisión importante: El proyecto SÍ contará con VEREDAS DE CONCRETO para que usted y su familia caminen sobre una superficie limpia, segura y duradera.
+- Respuesta (El "Sistema Híbrido"): "Permítame hacerle una precisión importante: El proyecto SÍ contará con VEREDAS DE CONCRETO para que usted y su familia caminen sobre una superficie limpia, segura y duradera. 
 Para las pistas (tránsito vehicular), mantenemos el 'Afirmado Técnico Compactado' por una razón de Ingeniería Hidráulica: en Piura, el asfalto sella el suelo y genera inundaciones cuando llueve. Nuestro sistema de pistas permite un DRENAJE PLUVIAL SUPERIOR.
-Este diseño híbrido (Veredas de Concreto + Pistas Drenantes) es la fórmula que nos permite darle confort peatonal manteniendo el precio en S/230/m². Si asfaltáramos todo, el costo se dispararía innecesariamente. ¿Le hace sentido priorizar veredas limpias y seguridad ante lluvias al mejor precio?"
+Este diseño híbrido (Veredas de Concreto + Pistas Drenantes) es la fórmula que nos permite darle confort peatonal manteniendo el precio en S/250/m². Si asfaltáramos todo, el costo se dispararía innecesariamente. ¿Le hace sentido priorizar veredas limpias y seguridad ante lluvias al mejor precio?"
 OBJECIÓN: "¿QUIÉN ME GARANTIZA QUE NO ES ESTAFA?"
 - Respuesta (Autoridad/Confianza): "Esa es la pregunta más importante. Nosotros operamos con 'Transparencia Total'.
 1. La tierra está a nombre de MADI INGENIERIA (RUC activo y habido).
@@ -103,14 +102,14 @@ OBJECIÓN: "¿QUIÉN ME GARANTIZA QUE NO ES ESTAFA?"
 
 OBJECIÓN: "ME DA MIEDO COMPRAR ACCIONES Y DERECHOS / QUIERO TÍTULO INDEPENDIZADO YA"
 - Respuesta (Certeza Jurídica y Transparencia): "Entiendo perfectamente su precaución, es la duda más inteligente que puede tener un inversionista. Le explico cómo garantizamos su propiedad:
-El modelo de acciones y derechos nos permite vender hoy a 'precio de preventa' (S/230/m²) antes de la independización final, que es cuando los precios suben.
+El modelo de acciones y derechos nos permite vender hoy a 'precio de preventa' (S/250/m²) antes de la independización final, que es cuando los precios suben.
 PERO, para su total seguridad, al firmar la ESCRITURA PÚBLICA en notaría, esta incluye obligatoriamente dos documentos clave:
 1. La MEMORIA DESCRIPTIVA exacta de su lote.
 2. El PLANO DE UBICACIÓN individualizado con sus coordenadas y linderos exactos.
 Esto significa que legalmente ya está definido EXTACTAMENTE cuál es su terreno dentro de la partida matriz de MADI. No hay ambigüedad. ¿Esta precisión legal le da la tranquilidad que necesita para aprovechar el precio de hoy?"
 
-OBJECIÓN: "ESTÁ CARO (S/230 m²)"
-- Respuesta (Valor vs Precio): "Comprendo que cuida su presupuesto. Pero comparemos manzanas con manzanas. Otros proyectos cuestan menos pero están en el Km 14, no tienen pórtico de seguridad o lo que es peor no cuentan con titulo de propiedad (Posesión). Por S/230 aquí tiene seguridad 24/7 y está a 2 min de un megaproyecto que multiplicara el valor de la zona. ¿Vale la pena arriesgar la seguridad de su inversión por ahorrar unos soles?"
+OBJECIÓN: "ESTÁ CARO (S/200 m²)"
+- Respuesta (Valor vs Precio): "Comprendo que cuida su presupuesto. Pero comparemos manzanas con manzanas. Otros proyectos cuestan menos pero están en el Km 14, no tienen pórtico de seguridad o lo que es peor no cuentan con titulo de propiedad (Posesión). Por S/200 aquí tiene seguridad 24/7 y está a 2 min de un megaproyecto que multiplicara el valor de la zona. ¿Vale la pena arriesgar la seguridad de su inversión por ahorrar unos soles?"
 OBJECIÓN: "TRANSPORTE PÚBLICO / ACCESO"
 - Respuesta: "Sí, el acceso es muy fluido. Por la carretera a Chulucanas pasan diversas líneas de transporte público y colectivos que conectan con el centro de Piura en 20 minutos. No estará aislado."
 OBJECIÓN: "DESAGÜE / BIODIGESTOR" (Es una alternativa para los clientes, nosotros no ofrecemos biodigestores)
@@ -118,7 +117,7 @@ OBJECIÓN: "DESAGÜE / BIODIGESTOR" (Es una alternativa para los clientes, nosot
 
 OBJECIÓN: "BUSCO ALGO MÁS DESARROLLADO / URBANIZADO"
 - Respuesta: "Entiendo que busque un entorno más consolidado. Sin embargo, permítame mostrarle la oportunidad desde la perspectiva de 'Inversión Inteligente':
-1. Plusvalía: Al comprar hoy en una etapa de desarrollo inicial, usted adquiere al precio más bajo posible. Cuando nuestro proyecto esté 100% desarrollado, su terreno tendrá un valor mucho mas elevado.
+1. Plusvalía: Al comprar hoy en una etapa de desarrollo inicial, usted adquiere al precio más bajo posible. Cuando nuestro proyecto esté 100% desarrollado, su terreno tendra un valor mucho mas elevado.
 2. Personalización: Un proyecto en desarrollo le da la libertad de elegir las mejores ubicaciones antes que nadie.
 3. Proyección: Estamos ubicados en el eje de crecimiento natural de Piura. Comprar 'desarrollado' hoy significa pagar precios altos; comprar 'en desarrollo' con nosotros es asegurar ganancia futura."
 
@@ -154,20 +153,20 @@ function programarSeguimiento(telefono) {
 
     // 2. Configurar tiempo
     // AHORA: 2 Horas (7200000 ms).
-    const TIEMPO_ESPERA = 2 * 60 * 60 * 1000;
+    const TIEMPO_ESPERA = 2 * 60 * 60 * 1000; 
 
     seguimientoTimers[telefono] = setTimeout(async () => {
         try {
             // Mensaje sutil de reactivación
             const mensajeSeguimiento = "Hola 👋, me quedé atento a tu respuesta. ¿Desea que le envié información adicional o prefieres agendar una llamada rápida con uno de nuestros asesores?";
-
+            
             await client.messages.create({
                 body: mensajeSeguimiento,
                 from: BOT_NUMBER,
                 to: telefono
             });
             registrarLog("BOT_AUTO", "Mensaje de seguimiento enviado", telefono);
-
+            
             delete seguimientoTimers[telefono];
         } catch (error) {
             console.error("Error enviando seguimiento:", error);
@@ -184,7 +183,7 @@ async function getGeminiResponse(userMessage, senderNum) {
         try {
             // 1. Recuperar historial del número (o crear uno vacío)
             let historial = historialConversaciones[senderNum] || [];
-
+            
             // Formatear historial para que la IA lo lea
             // Tomamos los últimos 6 mensajes para no saturar
             const historialTexto = historial.slice(-6).map(msg => `${msg.rol}: ${msg.texto}`).join('\n');
@@ -199,7 +198,7 @@ REGLAS DE COMPORTAMIENTO OBLIGATORIAS:
 1. **USA EL HISTORIAL**: Antes de preguntar algo, revisa el HISTORIAL de arriba. Si el cliente ya dijo su nombre o la fecha de visita, ¡NO LO VUELVAS A PEDIR! Confirma el dato y avanza.
 2. **NO REPETIR SALUDO**: Si en el historial ya saludaste, ve directo al punto.
 3. **REGLA DEL BUMERÁN**:Después de responder, haz una pregunta para conocer mejor al cliente, pero NO necesariamente sobre la cita.
-4. **CIERRE DE CITA**:
+4. **CIERRE DE CITA**: 
    - Si ya tienes FECHA y NOMBRE, confirma la cita.
    - Escribe al final en una línea nueva el código: "ALERTAR_ASESOR: [Resumen de la cita y perfil]".
    - Despídete y NO hagas más preguntas.
@@ -224,7 +223,7 @@ REGLAS DE COMPORTAMIENTO OBLIGATORIAS:
 9. LÍMITES DEL BOT:
    Si te hacen una pregunta técnica compleja, legal muy específica o que no está en tu base de conocimientos: NO INVENTES.
    Di: "Esa es una excelente pregunta técnica. Para darle el dato exacto, voy a asignarle un Asesor Especialista. ¿Prefiere que lo llamen por la mañana o por la tarde?"
-10. **ANTI-REDUNDANCIA:**
+10. **ANTI-REDUNDANCIA (NUEVA REGLA):**
    - ANTES de responder, lee el HISTORIAL RECIENTE arriba.
    - Si YA diste una información específica (ej: el precio, la ubicación, el portico de seguridad, o caracteristicas) en los últimos 2-3 mensajes, **NO LA REPITAS** a menos que el cliente pregunte explícitamente de nuevo.
    - Si vas a mencionar algo que ya dijiste, usa frases como "Como le comentaba anteriormente..." o "Recordando lo que vimos sobre...".
@@ -234,7 +233,6 @@ REGLAS DE COMPORTAMIENTO OBLIGATORIAS:
    Jamás des el precio si es que no te lo preguntan.
 12. PUNTO DE ENCUENTRO PARA LAS CITAS
    Las citas se realizan con la movilidad de la empresa (En caso el cliente no tenga movilidad) y el punto de reunión es en la ubicación de nuestras oficinas. Siempre que se agende una cita se debe dar la ubicación de las oficinas.
-Se puede agendar cita fuera del horario de atención, previa coordinación. 
 13.*MOMENTO DEL CIERRE:** invita a la visita cuando:
    - El cliente muestre interés claro ("Me gusta", "¿Dónde es?", "Quiero ir").
    - O cuando ya hayas resuelto sus dudas principales.
@@ -254,22 +252,21 @@ Se puede agendar cita fuera del horario de atención, previa coordinación.
    - Usa la estructura de fases: "Estamos en fase de PREVENTA".
    - Argumento: "Los precios actuales son especiales y subirán automáticamente conforme avancen las obras".
    - Escasez: "Las mejores ubicaciones (frente a parque/esquinas) vuelan rápido por la alta demanda". Usa esto para incentivar la visita sin ser agresivo ("Sería ideal que venga pronto para que pueda elegir las mejores ubicaciones antes que se agoten").
- 17. REFERENCIA VIVE HOGAR
-- Si el cliente pregunta acerca de si el proyecto se encuentra antes o después del proyecto VIVE HOGAR, ten en cuanta que Parques del alba se ubica en el kilometro 7.5 mientras que vive hogar en el kilometro 13, por ende parques del alba se encuentra mucho antes. 
+
 
 INSTRUCCIÓN:
 1.Analiza el mensaje actual: "${userMessage}".
-2.Responde en máximo 3 líneas. Usa emojis:  🏡✨🌅🌳📈📊🕒📍👋😊☀️📞 sin ser muy invasivo con ellos. Máximo 4 líneas.
+2.Responde en máximo 3 líneas. Usa emojis:  🏡✨🌅🌳📈📊🕒📍👋😊☀️📞 sin ser muy invasivo con ellos. Máximo 4 líneas.  
 3.Aplica la regla de las 4P si corresponde.
 4.TERMINA CASI SIEMPRE CON UNA PREGUNTA ESTRATÉGICA DE AVANCE DENTRO DEL CONTEXTO DEL MENSAJE ANTERIOR O DE LA CONVERSACIÓN (Si el cliente se está despidiendo o cerrando la charla, despídete amablemente invitándolo a preguntarle acerca de cualquier duda sin preguntar nada más .)
 
 `;
             const result = await model.generateContent(promptSistema);
             return result.response.text();
-
+            
         } catch (error) {
             console.error(`❌ Error IA (Intento ${intento}/${MAX_INTENTOS}):`, error.message);
-
+            
             // LÓGICA DE REINTENTO:
             // Si el error es 503 (Servicio no disponible) o "overloaded" (saturado)
             if (error.message.includes("503") || error.message.includes("overloaded")) {
@@ -278,10 +275,10 @@ INSTRUCCIÓN:
                     console.log("⏳ Servidor saturado. Reintentando en 2 segundos...");
                     // Esperamos 2 segundos antes de volver al inicio del 'for'
                     await new Promise(resolve => setTimeout(resolve, 2000));
-                    continue;
+                    continue; 
                 }
             }
-
+            
             // Si llegamos aquí es porque fallaron los 3 intentos o es un error fatal
             return "La señal está baja en obra. ¿Me repites por favor?  🏗️ ";
         }
@@ -304,16 +301,16 @@ app.post('/whatsapp', async (req, res) => {
     if (!historialConversaciones[senderNum]) historialConversaciones[senderNum] = [];
     historialConversaciones[senderNum].push({ rol: "CLIENTE", texto: incomingMsg });
     registrarLog("CLIENTE", incomingMsg, senderNum);
-
+    
     // Enviar a la IA con el número para que busque su memoria
     let aiResponse = await getGeminiResponse(incomingMsg, senderNum);
     let respuestaLimpia = aiResponse;
-
+    
     if (aiResponse.includes("ALERTAR_ASESOR:")) {
         const partes = aiResponse.split("ALERTAR_ASESOR:");
         respuestaLimpia = partes[0].trim();
         const resumenLead = partes[1].trim();
-
+        
         notificarAsesor(resumenLead, senderNum);
         registrarLog("SISTEMA", " ⚠️  ALERTA ENVIADA", senderNum);
 
@@ -323,11 +320,11 @@ app.post('/whatsapp', async (req, res) => {
             delete seguimientoTimers[senderNum];
         }
     }
-
+    
     // Guardar respuesta del bot en memoria RAM
     historialConversaciones[senderNum].push({ rol: "BOT", texto: respuestaLimpia });
     registrarLog("BOT", respuestaLimpia, senderNum);
-
+    
     const twiml = new MessagingResponse();
     twiml.message(respuestaLimpia);
     res.type('text/xml').send(twiml.toString());
